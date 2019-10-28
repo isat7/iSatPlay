@@ -1,0 +1,4 @@
+npm nearley i --save
+ npx nearleyc json.ne -o json.js
+node parse.js
+ node parse.js example1.mypl

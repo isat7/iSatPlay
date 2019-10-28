@@ -1,0 +1,1 @@
+[{"type":"var_assignment","varname":"sb","value":1},{"type":"var_assignment","varname":"b","value":2},{"type":"while_loop","condition":{"type":"binary_expression","left":"b","operator":"<","right":"sb"},"body":[{"type":"var_assignment","varname":"b","value":4}]}]
