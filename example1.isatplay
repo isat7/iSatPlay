@@ -1,5 +1,8 @@
-sb:=1
-b:=2
-while b<sb [
+sb:=8 bc:=0
+while b<bc [
     b:=4
+
+    
+    print b
+b:=b+1
 ]

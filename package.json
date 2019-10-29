@@ -1,7 +1,7 @@
 {
-  "name": "iSatPlay",
-  "version": "1.0.0",
-  "description": "",
+  "name": "isatplay",
+  "version": "1.0.2",
+  "description": "iSatPl is a simple programing language that compiles to javascript and inspired by roy and zoho delug language",
   "main": "iSatPl.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -14,5 +14,14 @@
     "jison": "^0.4.18",
     "mz": "^2.7.0",
     "nearley": "^2.19.0"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/isat7/iSatPlay.git"
+  },
+  "bugs": {
+    "url": "https://github.com/isat7/iSatPlay/issues"
+  },
+  "homepage": "https://github.com/isat7/iSatPlay#readme"
 }

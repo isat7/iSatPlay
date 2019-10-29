@@ -50,6 +50,11 @@ node generate.js myprogram.ast
 node run.js myprogram.isatplay
 ```
 
+## Bug fixes
+
+- variable re-declaration
+- space and new line 
+
 
 ### We are Not Responsible for if any damage causes(dont Download without knowledge)
 ## Licensing

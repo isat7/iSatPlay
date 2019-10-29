@@ -14,16 +14,22 @@ const lines=[];
 
 for(let statement of statements){
     console.log(statement);
+console.log(declaredVariable);
     if(statement.type==="var_assignment"){
-
-        if(declaredVariable.indexOf(statement.varname==-1)){
-            lines.push('let'+statement.varname+"="+statement.value);
+        
+        const value=generateJSFORExpression(statement.value,declaredVariable) 
+        console.log(declaredVariable.indexOf(statement.varname==-1));
+        if(declaredVariable.indexOf(statement.varname)===-1){
+            lines.push('let '+statement.varname+"="+value);
             declaredVariable.push(statement.varname);
+            console.log("isat->debug=>variable declaration");
+          
         }else{
-            lines.push('let'+statement.varname+'='+statement.value);
-        }
-        const value=generateJSFORExpression(statement.value,declaredVariable)
-      lines.push('let '+statement.varname+"="+value);
+            console.log("isat->debug=>already variable declared");
+            lines.push(statement.varname+'='+value);
+                  }
+    //   lines.push('let '+statement.varname+"="+value);
+     
     }
     else if(statement.type==="print_statement"){
 
@@ -46,7 +52,6 @@ return lines.join("\n")
 }
 
 function generateJSFORExpression(expression,declaredVariable){
-    console.log("js=>"+expression)
     const operatorMap={
 
         "+":"+",
@@ -67,7 +72,6 @@ function generateJSFORExpression(expression,declaredVariable){
     }
 
     if(typeof expression=='object'){
-        console.log(typeof expression);
         if(expression.type==="binary_expression"){
             const left=generateJSFORExpression(expression.left,declaredVariable);
             const right=generateJSFORExpression(expression.right,declaredVariable);

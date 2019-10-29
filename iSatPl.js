@@ -10,21 +10,18 @@ var grammar = {
         
         data => [data[1]]
           },
-    {"name": "statements$string$1", "symbols": [{"literal":"\r"}, {"literal":"\n"}], "postprocess": function joiner(d) {return d.join('');}},
-    {"name": "statements", "symbols": ["_", "statement", "_", "statements$string$1", "statements"], "postprocess": data => [data[1], ...data[4]]},
+    {"name": "statements", "symbols": ["_", "statement", "_", "statements"], "postprocess": data => [data[1], ...data[3]]},
     {"name": "statement", "symbols": ["var_assignment"], "postprocess": id},
     {"name": "statement", "symbols": ["print_statement"], "postprocess": id},
     {"name": "statement", "symbols": ["while_loop"], "postprocess": id},
     {"name": "while_loop$string$1", "symbols": [{"literal":"w"}, {"literal":"h"}, {"literal":"i"}, {"literal":"l"}, {"literal":"e"}], "postprocess": function joiner(d) {return d.join('');}},
-    {"name": "while_loop$string$2", "symbols": [{"literal":"\r"}, {"literal":"\n"}], "postprocess": function joiner(d) {return d.join('');}},
-    {"name": "while_loop$string$3", "symbols": [{"literal":"\r"}, {"literal":"\n"}], "postprocess": function joiner(d) {return d.join('');}},
-    {"name": "while_loop", "symbols": ["while_loop$string$1", "__", "binary_expression", "_", {"literal":"["}, "_", "while_loop$string$2", "_", "statements", "_", "while_loop$string$3", "_", {"literal":"]"}], "postprocess": 
+    {"name": "while_loop", "symbols": ["while_loop$string$1", "__", "binary_expression", "_", {"literal":"["}, "_", "statements", "_", {"literal":"]"}], "postprocess": 
         
         data=>{
             return {
                 type :"while_loop",
                 condition:data[2],
-                body:data[8]
+                body:data[6]
             }
         }
         
@@ -64,7 +61,7 @@ var grammar = {
     {"name": "operator", "symbols": ["operator$string$2"], "postprocess": id},
     {"name": "operator", "symbols": [{"literal":"="}], "postprocess": id},
     {"name": "var_assignment$string$1", "symbols": [{"literal":":"}, {"literal":"="}], "postprocess": function joiner(d) {return d.join('');}},
-    {"name": "var_assignment", "symbols": ["identifier", "_", "var_assignment$string$1", "_", "expression"], "postprocess": 
+    {"name": "var_assignment", "symbols": ["identifier", "___", "var_assignment$string$1", "___", "expression"], "postprocess": 
         data=>{
             return{
                 type: "var_assignment",
@@ -75,11 +72,14 @@ var grammar = {
         }
         },
     {"name": "_$ebnf$1", "symbols": []},
-    {"name": "_$ebnf$1", "symbols": ["_$ebnf$1", /[ ]/], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
+    {"name": "_$ebnf$1", "symbols": ["_$ebnf$1", /[\s+]/], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
     {"name": "_", "symbols": ["_$ebnf$1"]},
     {"name": "__$ebnf$1", "symbols": [/[ ]/]},
     {"name": "__$ebnf$1", "symbols": ["__$ebnf$1", /[ ]/], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
     {"name": "__", "symbols": ["__$ebnf$1"]},
+    {"name": "___$ebnf$1", "symbols": []},
+    {"name": "___$ebnf$1", "symbols": ["___$ebnf$1", /[ ]/], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
+    {"name": "___", "symbols": ["___$ebnf$1"]},
     {"name": "identifier$ebnf$1", "symbols": [/[a-z]/]},
     {"name": "identifier$ebnf$1", "symbols": ["identifier$ebnf$1", /[a-z]/], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
     {"name": "identifier", "symbols": ["identifier$ebnf$1"], "postprocess": data=>data[0].join("")},
